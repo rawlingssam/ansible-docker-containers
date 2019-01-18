@@ -24,4 +24,5 @@
   roles:
     - 'bootstrap'
     - 'docker'
+    - 'nginx'
 
