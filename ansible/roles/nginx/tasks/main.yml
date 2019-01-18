@@ -10,7 +10,7 @@
     -w /site
     --name={{temp_container_name}}
     alpine:latest
-    ansible-playbook nginx-playbook.yml -c local"
+    ansible-playbook --check nginx-playbook.yml local"
 
 - name: create a docker image from the container
   command: "docker commit
