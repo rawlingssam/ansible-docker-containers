@@ -15,6 +15,7 @@
   gather_facts: false
   roles:
     - 'bootstrap'
+    - 'docker'
 
 # * Target whatever is the default group of hosts;
 # * If any errors happen in the middle, stop the
@@ -24,8 +25,9 @@
 # python);
 # * Execute the `docker` role.
 
-- hosts: 'default'
-  become: true
-  any_errors_fatal: true
-  roles:
-    - 'docker'
+#- hosts: 'default'
+#  become: true
+#  any_errors_fatal: true
+#  roles:
+#    - 'docker'
+
