@@ -74,8 +74,8 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
     config.vm.provision "ansible" do |ansible|
       ansible.verbose = "vvv"
-      ansible.config_file = "../vagrant-ansible-docker-nginx/ansible/ansible.cfg"
-      ansible.inventory_path = "../vagrant-ansible-docker-nginx/ansible/inventory.yml"
-      ansible.playbook = "../vagrant-ansible-docker-nginx/ansible/playbooks/vagrant-ansible-provisioning.yml"
+      ansible.config_file = "../ansible-docker-containers/ansible/ansible.cfg"
+      ansible.inventory_path = "../ansible-docker-containers/ansible/inventory.yml"
+      ansible.playbook = "../ansible-docker-containers/ansible/playbooks/vagrant-ansible-provisioning.yml"
     end
 end
