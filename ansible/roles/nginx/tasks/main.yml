@@ -9,7 +9,7 @@
     -v /tmp/site:/site
     -w /site
     --name={{temp_container_name}}
-    alpine:latest
+    library/alpine:latest
     ansible-playbook --check nginx-playbook.yml local"
 
 - name: create a docker image from the container
