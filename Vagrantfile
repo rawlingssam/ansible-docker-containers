@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/xenial64"
 
   # Set the hostname of the machine
-    config.vm.hostname = "test-machine"
+    config.vm.hostname = "docker"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
