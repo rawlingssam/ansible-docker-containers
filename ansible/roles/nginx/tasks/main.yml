@@ -1,15 +1,21 @@
 - name: create a unique temp container name
   set_fact:
-    temp_container_name: nginx_container_{{lookup('pipe', 'date "+%Y%m%d%H%M%S"')}}
+    temp_container_name: nginx_image_{{lookup('pipe', 'date "+%Y%m%d%H%M%S"')}}
 
-# To confirm that I used the official alpine linux image, here is
-# a reference to the url: https://hub.docker.com/_/alpine
+- name: check for existence of our base image
+  shell: "docker images | grep nginx-base-image | grep 1.0"
+  ignore_errors: yes
+  register: image_check
+
+- set_fact:
+    base_image: "{{'nginx-base-image:1.0' if image_check.rc == 0 else 'library/alpine:latest'}}"
+
 - name: build site by running ansible in a docker container
   command: "docker run
     -v /tmp/site:/site
     -w /site
     --name={{temp_container_name}}
-    library/alpine:latest
+    {{base_image}}
     ansible-playbook --check nginx-playbook.yml local"
 
 - name: create a docker image from the container
@@ -17,7 +23,7 @@
     -c 'EXPOSE 80'
     -c 'CMD [\"nginx\", \"-g\", \"daemon off;\"]'
     {{temp_container_name}}
-    ansible-nginx:1.0"
+    nginx-base-image:1.0"
 
 - name: delete the container once the image has been successfully built
   command: docker rm -f -v {{temp_container_name}}
